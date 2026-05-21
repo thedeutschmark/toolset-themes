@@ -1,0 +1,77 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/thedeutschmark/toolset-themes/blob/main/schema/widget-theme.schema.json",
+  "title": "WidgetTheme",
+  "description": "A community-submitted theme that overrides appearance fields and optional CSS for a single widget type.",
+  "type": "object",
+  "required": ["schemaVersion", "kind", "widgetType", "name", "author", "description", "previewImage", "fields"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "type": "integer",
+      "const": 1,
+      "description": "Schema version. Always 1 for this contract version."
+    },
+    "kind": {
+      "type": "string",
+      "const": "widget-theme",
+      "description": "Artifact kind discriminator."
+    },
+    "widgetType": {
+      "type": "string",
+      "enum": [
+        "player",
+        "chat-box",
+        "death-counter",
+        "lurk-peek",
+        "emote-rain",
+        "shoutout",
+        "brb-player",
+        "clip-play",
+        "stream",
+        "event-list",
+        "timer"
+      ],
+      "description": "The widget surface this theme targets. Must match a known WidgetType."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "description": "Display name shown in the catalog grid."
+    },
+    "author": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "description": "Contributor's handle (GitHub username or agreed alias)."
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "description": "One-line description of the theme's intent."
+    },
+    "previewImage": {
+      "type": "string",
+      "pattern": "^[^/][^:]*\\.png$",
+      "description": "Relative path to the preview PNG within the theme directory. Required. Max 512KB."
+    },
+    "fields": {
+      "type": "object",
+      "description": "Partial widget config to merge over the widget's current settings. Keys must be a subset of the widget's FIELDS schema.",
+      "additionalProperties": {
+        "oneOf": [
+          { "type": "string" },
+          { "type": "number" },
+          { "type": "boolean" }
+        ]
+      }
+    },
+    "overridesCSS": {
+      "type": "string",
+      "pattern": "^[^/][^:]*\\.css$",
+      "description": "Optional relative path to a CSS file within the theme directory. No url(https://), no @import, no <script>."
+    }
+  }
+}

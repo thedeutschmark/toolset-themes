@@ -1,0 +1,15 @@
+/* Optional CSS overrides for the Monochrome Minimal chat theme.
+   Scoped to the widget root at apply time. Targets only the documented
+   selectors in docs/css-selectors.md — these are the stable hooks. */
+
+/* Tighten the gap between stacked rows for a denser, cleaner read. */
+.chat-line--stacked {
+  row-gap: 2px;
+}
+
+/* Slightly dim the message body relative to the name so the name leads
+   the eye. The colors themselves are set via the `fields` overrides; this
+   only nudges the relationship between them. */
+.chat-message {
+  opacity: 0.92;
+}

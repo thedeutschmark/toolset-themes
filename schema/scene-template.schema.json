@@ -1,0 +1,135 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/thedeutschmark/toolset-themes/blob/main/schema/scene-template.schema.json",
+  "title": "SceneTemplate",
+  "description": "A pre-composed layer layout the scene builder can load. widgetToken values are not included — those are assigned at import time.",
+  "type": "object",
+  "required": ["schemaVersion", "kind", "name", "author", "description", "previewImage", "canvas", "layers"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "type": "integer",
+      "const": 1,
+      "description": "Schema version. Always 1 for v1 canvas (1920x1080)."
+    },
+    "kind": {
+      "type": "string",
+      "const": "scene-template",
+      "description": "Artifact kind discriminator."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "description": "Display name shown in the catalog."
+    },
+    "author": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "description": "Contributor's handle."
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "description": "One-line description of the template's layout intent."
+    },
+    "previewImage": {
+      "type": "string",
+      "pattern": "^[^/][^:]*\\.png$",
+      "description": "Relative path to the preview PNG. Required. Max 512KB."
+    },
+    "canvas": {
+      "type": "object",
+      "required": ["width", "height"],
+      "additionalProperties": false,
+      "properties": {
+        "width": {
+          "type": "integer",
+          "const": 1920,
+          "description": "Canvas width. v1: must be 1920."
+        },
+        "height": {
+          "type": "integer",
+          "const": 1080,
+          "description": "Canvas height. v1: must be 1080."
+        }
+      }
+    },
+    "layers": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 16,
+      "description": "Ordered array of layer slots (index 0 = bottom-most). widgetToken is not included.",
+      "items": {
+        "type": "object",
+        "required": ["widgetType", "position"],
+        "additionalProperties": false,
+        "properties": {
+          "widgetType": {
+            "type": "string",
+            "enum": [
+              "player",
+              "chat-box",
+              "death-counter",
+              "lurk-peek",
+              "emote-rain",
+              "shoutout",
+              "brb-player",
+              "clip-play",
+              "stream",
+              "event-list",
+              "timer"
+            ],
+            "description": "Widget type for this layer slot."
+          },
+          "position": {
+            "type": "object",
+            "required": ["top", "left", "width", "height", "rotation", "opacity"],
+            "additionalProperties": false,
+            "properties": {
+              "top":      { "type": "number", "description": "px from canvas top" },
+              "left":     { "type": "number", "description": "px from canvas left" },
+              "width":    { "type": "number", "minimum": 1, "description": "px" },
+              "height":   { "type": "number", "minimum": 1, "description": "px" },
+              "rotation": { "type": "number", "minimum": 0, "maximum": 360, "description": "degrees" },
+              "opacity":  { "type": "number", "minimum": 0, "maximum": 1, "description": "0–1" }
+            }
+          },
+          "animation": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "enter": {
+                "type": "object",
+                "required": ["kind", "durationMs"],
+                "additionalProperties": false,
+                "properties": {
+                  "kind": {
+                    "type": "string",
+                    "enum": ["fade", "slide-up", "slide-down", "slide-left", "slide-right", "zoom-in", "zoom-out", "pop", "rotate-in"],
+                    "description": "Enter animation kind. Must match AnimationKind in types.ts."
+                  },
+                  "durationMs": { "type": "number", "minimum": 0, "maximum": 5000 }
+                }
+              },
+              "exit": {
+                "type": "object",
+                "required": ["kind", "durationMs"],
+                "additionalProperties": false,
+                "properties": {
+                  "kind": {
+                    "type": "string",
+                    "enum": ["fade", "slide-up", "slide-down", "slide-left", "slide-right", "zoom-in", "zoom-out", "pop", "rotate-in"]
+                  },
+                  "durationMs": { "type": "number", "minimum": 0, "maximum": 5000 }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

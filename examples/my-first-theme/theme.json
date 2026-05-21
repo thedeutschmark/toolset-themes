@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "kind": "widget-theme",
+  "widgetType": "chat-box",
+  "name": "Monochrome Minimal",
+  "author": "example-author",
+  "description": "High-contrast white-on-dark chat. No chip backing, badges off, clean Space Grotesk.",
+  "previewImage": "preview.png",
+  "fields": {
+    "nameColor": "#ffffff",
+    "messageColor": "#c7ccd6",
+    "bgColor": "transparent",
+    "chipOpacity": 0,
+    "chipGlass": false,
+    "nameChip": false,
+    "showBadges": false,
+    "fontFamily": "Space Grotesk",
+    "alignment": "left",
+    "animation": "fade",
+    "nameCase": "user",
+    "nameOnOwnRow": true
+  },
+  "overridesCSS": "overrides.css"
+}
