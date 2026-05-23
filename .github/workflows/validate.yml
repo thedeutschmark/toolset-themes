@@ -1,0 +1,36 @@
+name: validate
+
+# Runs the submission validator on every PR that touches `submissions/`.
+# Authors see exactly why their submission failed, before a human looks.
+# Schema, CSS-safety, asset, and duplicate-slug checks are all here; the
+# "no AI" rule and visual judgment are human-reviewed (see CONTRIBUTING).
+
+on:
+  pull_request:
+    paths:
+      - 'submissions/**'
+      - 'schema/**'
+      - 'scripts/validate-submission.mjs'
+      - '.github/workflows/validate.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'submissions/**'
+      - 'schema/**'
+      - 'scripts/validate-submission.mjs'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install validator deps
+        run: npm install --no-save ajv@8 ajv-formats@3
+
+      - name: Run validator
+        run: node scripts/validate-submission.mjs

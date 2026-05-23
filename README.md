@@ -47,18 +47,24 @@ and explained in [`docs/widget-themes.md`](docs/widget-themes.md).
 README.md
 LICENSE
 CONTRIBUTING.md
-.github/pull_request_template.md
+.github/
+  pull_request_template.md
+  workflows/validate.yml   submission CI (schema + CSS + asset checks)
 docs/
-  concepts.md          what makes a good theme
-  fields-overview.md   how field overrides work
-  widget-themes.md     the WidgetTheme format
-  css-selectors.md     the CSS selector contract themes can rely on
-  review-criteria.md   the quality bar, written plainly
+  concepts.md              what makes a good theme
+  fields-overview.md       how field overrides work
+  widget-themes.md         the WidgetTheme format
+  css-selectors.md         the CSS selector contract themes can rely on
+  review-criteria.md       the quality bar, written plainly
 schema/
   widget-theme.schema.json
 examples/
-  my-first-theme/      a minimal working chat-box theme
-submissions/           you add your theme directory here
+  my-first-theme/          a minimal working chat-box theme
+scripts/
+  validate-submission.mjs  what CI runs — also runs locally
+tools/
+  preview-harness/         tiny local server to preview a theme as you build it
+submissions/               you add your theme directory here
 ```
 
 ## Themes are not Accents
@@ -67,3 +73,23 @@ If you came here from the toolset, note that **Themes** (this repo) are
 distinct from **Accents** — the supporter dashboard skins (Silver, Gold,
 Nyan Cat) inside the app. Accents are internal and not community-submittable.
 Themes are open to anyone and apply to your widgets, not the dashboard.
+
+## License
+
+Contributed themes are licensed under
+[Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)](LICENSE).
+
+**Statement of intent** (how the licensor reads and applies this license):
+
+- Accepted themes are free to every toolset user, always.
+- You may use a theme on your own stream, including a stream you monetize
+  through ads, subscriptions, or donations. That is not "commercial use"
+  of the theme and is explicitly permitted.
+- What is not permitted: reselling or redistributing a contributed theme
+  itself as a standalone commercial product or paid pack.
+- Attribution lives in this repository and in the in-app catalog metadata —
+  keep author credit intact when redistributing.
+
+This statement expresses the licensor's intent and will not be enforced
+against streamers for monetizing their own broadcasts. Where it is silent,
+the CC BY-NC 4.0 legal text in [`LICENSE`](LICENSE) governs.

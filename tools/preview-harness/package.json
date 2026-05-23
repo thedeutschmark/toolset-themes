@@ -1,0 +1,11 @@
+{
+  "name": "toolset-themes-preview-harness",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Local preview server for testing a toolset theme.",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "node src/server.mjs"
+  }
+}
