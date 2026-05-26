@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 2,
+  "kind": "theme-pack",
+  "name": "Sunset Deck",
+  "author": "example-author",
+  "description": "Warm sunset palette, retro arcade vibes — covers Music, Chat Box, and Death Counter in one click.",
+  "previewHero": "preview-hero.png",
+  "palette": {
+    "primary": "#ff7849",
+    "accent": "#ffcc4b",
+    "background": "transparent",
+    "fontFamily": "Outfit"
+  },
+  "widgets": {
+    "player": {
+      "previewImage": "preview-player.png",
+      "fields": {
+        "skin": "compact",
+        "tintMode": "fixed",
+        "tintColor": "#ff7849",
+        "fontFamily": "Outfit",
+        "theme": "dark"
+      }
+    },
+    "chat-box": {
+      "previewImage": "preview-chat-box.png",
+      "fields": {
+        "nameColor": "#ffcc4b",
+        "messageColor": "#ffeacd",
+        "chipColor": "#ff7849",
+        "chipOpacity": 18,
+        "chipGlass": true,
+        "fontFamily": "Outfit",
+        "alignment": "left"
+      }
+    },
+    "death-counter": {
+      "previewImage": "preview-death-counter.png",
+      "fields": {
+        "skin": "tombstone",
+        "accent": "#ff7849",
+        "label": "Wipes"
+      }
+    }
+  }
+}

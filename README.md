@@ -2,31 +2,46 @@
 
 Build a theme for the stream toolset and submit it to the catalog.
 
-A theme customizes the look of a single widget — chat box, death counter,
-music player, and others as they expose their settings. It is field
-overrides (the same settings the tool page exposes) plus optional scoped
-CSS. Themes are data and CSS only: no JavaScript, no external assets, no
-commerce. Accepted themes are free to every toolset user.
+A theme customizes the look of one or more widgets — chat box, death counter,
+music player, and others as they expose their settings. It is field overrides
+(the same settings the tool page exposes) plus optional scoped CSS. Themes are
+data and CSS only: no JavaScript, no external assets, no commerce. Accepted
+themes are free to every toolset user.
 
-This repo is both the SDK (how to build a theme) and the submission
-inbox (where you open a pull request). If your theme is accepted it shows
-up in the in-app Themes catalog at `toolset.deutschmark.online/tools/themes`.
+This repo is both the SDK (how to build a theme) and the submission inbox
+(where you open a pull request). If your theme is accepted it shows up in
+the in-app Themes catalog at `toolset.deutschmark.online/tools/themes`.
 
 ## What you can submit
 
-A **widget theme**: field overrides plus optional CSS for one widget type.
-The format is defined in [`schema/widget-theme.schema.json`](schema/widget-theme.schema.json)
-and explained in [`docs/widget-themes.md`](docs/widget-themes.md).
+Two formats. Pick the one that matches what you're styling:
+
+- **Theme pack** (v2, `kind: "theme-pack"`) — styles multiple widgets at once
+  with a shared palette. One click in the toolset applies it across the
+  streamer's music, chat, death counter, etc. all in matching colors. Best
+  for "all-encompassing" looks. Defined in
+  [`schema/theme-pack.schema.json`](schema/theme-pack.schema.json); example
+  at [`examples/my-first-pack/`](examples/my-first-pack/).
+
+- **Widget theme** (v1, `kind: "widget-theme"`) — styles one widget surface.
+  Best when you want to nail a specific look on a specific tool. Defined in
+  [`schema/widget-theme.schema.json`](schema/widget-theme.schema.json);
+  example at [`examples/my-first-theme/`](examples/my-first-theme/).
+
+Both formats live in the catalog side-by-side. The toolset's apply UX is the
+same shape for both — a multi-source checkbox modal.
 
 ## Quick start
 
 1. Fork this repo.
-2. Copy [`examples/my-first-theme/`](examples/my-first-theme/) to
+2. Copy [`examples/my-first-pack/`](examples/my-first-pack/) (v2) or
+   [`examples/my-first-theme/`](examples/my-first-theme/) (v1) to
    `submissions/<your-handle>/<theme-slug>/`.
-3. Edit `theme.json` — set the `widgetType`, `name`, `author`, and the
-   `fields` you want to override. Keep `fields` to keys the widget
-   actually exposes (see [`docs/fields-overview.md`](docs/fields-overview.md)).
-4. Add an honest `preview.png` and, if you wrote any, `overrides.css`.
+3. Edit `theme.json` — set `name`, `author`, `description`, and the
+   `fields` you want to override per widget. Keep `fields` to keys the
+   widget actually exposes (see [`docs/fields-overview.md`](docs/fields-overview.md)).
+4. Replace the preview PNGs. Hero is 16:9, ≤ 512 KB. One preview per widget
+   the theme covers.
 5. Open a pull request. Read [`CONTRIBUTING.md`](CONTRIBUTING.md) first —
    it covers the quality bar and the rules.
 
@@ -57,9 +72,11 @@ docs/
   css-selectors.md         the CSS selector contract themes can rely on
   review-criteria.md       the quality bar, written plainly
 schema/
-  widget-theme.schema.json
+  widget-theme.schema.json (v1)
+  theme-pack.schema.json   (v2)
 examples/
-  my-first-theme/          a minimal working chat-box theme
+  my-first-theme/          a minimal working v1 chat-box theme
+  my-first-pack/           a minimal working v2 multi-widget pack
 scripts/
   validate-submission.mjs  what CI runs — also runs locally
 tools/
