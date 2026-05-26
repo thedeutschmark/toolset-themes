@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://github.com/thedeutschmark/toolset-sdk/blob/main/schema/theme-pack.schema.json",
+  "$id": "https://github.com/thedeutschmark/toolset-themes/blob/main/schema/theme-pack.schema.json",
   "title": "ThemePack",
   "description": "A multi-widget theme. Bundles per-widget entries plus shared metadata so the user can apply one theme to many of their sources in a single click.",
   "type": "object",
