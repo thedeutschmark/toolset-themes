@@ -1,0 +1,91 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/thedeutschmark/toolset-sdk/blob/main/schema/theme-pack.schema.json",
+  "title": "ThemePack",
+  "description": "A multi-widget theme. Bundles per-widget entries plus shared metadata so the user can apply one theme to many of their sources in a single click.",
+  "type": "object",
+  "required": ["schemaVersion", "kind", "name", "author", "description", "previewHero", "widgets"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "type": "integer",
+      "const": 2,
+      "description": "Schema version. Always 2 for ThemePack."
+    },
+    "kind": {
+      "type": "string",
+      "const": "theme-pack",
+      "description": "Artifact kind discriminator."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "author": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "previewHero": {
+      "type": "string",
+      "pattern": "^[^/][^:]*\\.png$",
+      "description": "Relative path to the hero preview PNG. Required. ≤512KB."
+    },
+    "palette": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Optional shared palette. Cosmetic only — for catalog swatches.",
+      "properties": {
+        "primary":    { "type": "string" },
+        "secondary":  { "type": "string" },
+        "accent":     { "type": "string" },
+        "background": { "type": "string" },
+        "fontFamily": { "type": "string" }
+      }
+    },
+    "widgets": {
+      "type": "object",
+      "minProperties": 1,
+      "description": "Per-widget entries. Keys must be values from the WidgetType enum.",
+      "additionalProperties": false,
+      "patternProperties": {
+        "^(player|chat-box|death-counter|lurk-peek|emote-rain|shoutout|brb-player|clip-play|stream|event-list|timer)$": {
+          "type": "object",
+          "required": ["previewImage", "fields"],
+          "additionalProperties": false,
+          "properties": {
+            "previewImage": {
+              "type": "string",
+              "pattern": "^[^/][^:]*\\.png$"
+            },
+            "fields": {
+              "type": "object",
+              "additionalProperties": {
+                "oneOf": [
+                  { "type": "string" },
+                  { "type": "number" },
+                  { "type": "boolean" }
+                ]
+              }
+            },
+            "overridesCSS": {
+              "type": "string",
+              "pattern": "^[^/][^:]*\\.css$"
+            }
+          }
+        }
+      }
+    },
+    "sharedCSS": {
+      "type": "string",
+      "pattern": "^[^/][^:]*\\.css$",
+      "description": "Optional shared CSS scoped to all widgets in the pack at apply time."
+    }
+  }
+}
